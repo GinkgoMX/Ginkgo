@@ -3,7 +3,10 @@ import { getRegionBySlug, getRegionDocuments } from "@/lib/sanity/queries";
 import { toLegacyRegion } from "@/lib/sanity/adapters";
 import Photo from "@/components/ui/Photo";
 import Eyebrow from "@/components/ui/Eyebrow";
-import LeadFormD from "@/components/LeadFormD";
+import Section from "@/components/ui/Section";
+import SectionHeader, { SUBHEADING_CLASSES } from "@/components/ui/SectionHeader";
+import CTABand from "@/components/ui/CTABand";
+import DocumentList from "@/components/DocumentList";
 
 export const revalidate = 60;
 
@@ -29,77 +32,51 @@ export default async function RegionDetailES({ params }) {
 
   return (
     <main className="bg-cream">
-      <section className="relative flex h-[50vh] items-center justify-center overflow-hidden">
+      <section className="relative flex h-[45vh] min-h-[320px] items-center justify-center overflow-hidden">
         <Photo src={region.heroImage} alt={region.name_es} className="absolute inset-0" priority />
         <div className="absolute inset-0 bg-charcoal/50" />
-        <h1 className="relative z-10 px-4 text-center font-serif text-4xl font-semibold text-white">
-          {region.name_es}
-        </h1>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-6 py-20 md:px-10">
-        <p className="rounded-lg border border-border bg-paper p-8 leading-relaxed text-ink shadow-sm">
-          {region.description_es}
-        </p>
-      </section>
-
-      {region.advantages_es.length > 0 && (
-        <section className="mx-auto max-w-5xl px-6 pb-10 md:px-10">
-          <Eyebrow>Por qué esta región</Eyebrow>
-          <h2 className="mt-2 mb-6 font-serif text-3xl font-semibold text-charcoal">
-            Ventajas Estratégicas
-          </h2>
-          <ul className="space-y-4">
-            {region.advantages_es.map((adv) => (
-              <li key={adv} className="rounded-lg border border-border bg-paper p-6 text-ink shadow-sm">
-                {adv}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section className="mx-auto max-w-5xl px-6 py-20 md:px-10">
-        <Photo
-          src={region.mapImage}
-          alt={`Mapa de ${region.name_es}`}
-          className="h-96 w-full rounded-lg border border-border"
-        />
-      </section>
-
-      {documents.length > 0 && (
-        <section className="mx-auto max-w-5xl px-6 pb-20 md:px-10">
-          <h2 className="mb-8 font-serif text-3xl font-semibold text-charcoal">Documentos</h2>
-          <ul className="space-y-3">
-            {documents.map((doc) => (
-              <li key={doc._id}>
-                <a
-                  href={doc.file?.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-lg border border-border bg-paper p-6 text-ink shadow-sm hover:text-brand-600"
-                >
-                  {doc.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section id="formulario" className="bg-paper px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-semibold text-charcoal">
-            ¿Buscas oportunidades en esta región?
-          </h2>
-          <p className="mt-4 text-ink">
-            Cuéntanos tus necesidades y te presentaremos opciones alineadas con tu perfil.
-          </p>
-          <div className="mt-10 rounded-lg border border-border bg-cream p-8 text-left shadow-sm md:p-10">
-            <LeadFormD locale="es" id="lead-region" />
-          </div>
+        <div className="relative z-10 px-6 text-center">
+          <Eyebrow className="justify-center text-white/80">Región estratégica</Eyebrow>
+          <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight text-white md:text-5xl">{region.name_es}</h1>
         </div>
       </section>
+
+      <Section>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[7fr_5fr] lg:gap-12">
+          <div>
+            <p className="text-lg leading-relaxed text-ink">{region.description_es}</p>
+
+            {region.advantages_es.length > 0 && (
+              <div className="mt-12">
+                <SectionHeader eyebrow="Por qué esta región" title="Ventajas Estratégicas" />
+                <ul className="mt-8 space-y-3">
+                  {region.advantages_es.map((adv) => (
+                    <li key={adv} className="flex gap-3 rounded-lg border border-border bg-paper p-5 leading-relaxed text-ink shadow-sm">
+                      <span className="mt-2.5 h-[2px] w-4 shrink-0 bg-gold" aria-hidden="true" />
+                      {adv}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <Photo
+            src={region.mapImage}
+            alt={`Mapa de ${region.name_es}`}
+            className="h-80 w-full self-start rounded-lg border border-border lg:sticky lg:top-28"
+          />
+        </div>
+
+        {documents.length > 0 && (
+          <div className="mt-12">
+            <h2 className={SUBHEADING_CLASSES}>Documentos</h2>
+            <DocumentList documents={documents} />
+          </div>
+        )}
+      </Section>
+
+      <CTABand title="¿Buscas oportunidades en esta región?" text="Cuéntanos tus necesidades y te presentaremos opciones alineadas con tu perfil." buttonLabel="Solicitar información" />
     </main>
   );
 }

@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getInsightBySlug } from "@/lib/sanity/queries";
 import { toLegacyInsight } from "@/lib/sanity/adapters";
 import Photo from "@/components/ui/Photo";
-import LeadFormD from "@/components/LeadFormD";
+import Section from "@/components/ui/Section";
+import CTABand from "@/components/ui/CTABand";
 
 export const revalidate = 60;
 
@@ -27,38 +29,28 @@ export default async function InsightDetailES({ params }) {
 
   return (
     <main className="bg-cream">
-      <section className="relative flex h-[50vh] items-center justify-center overflow-hidden">
+      <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden">
         <Photo src={article.image} alt={article.title_es} className="absolute inset-0" priority />
-        <div className="absolute inset-0 bg-charcoal/50" />
-        <h1 className="relative z-10 px-4 text-center font-serif text-4xl font-semibold text-white">
-          {article.title_es}
-        </h1>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 py-12 md:px-10">
-        <p className="font-semibold uppercase tracking-wide text-brand-600">{article.category_es}</p>
-        <p className="text-muted">{article.date_es}</p>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 pb-20 md:px-10">
-        <div className="whitespace-pre-line rounded-lg border border-border bg-paper p-8 leading-relaxed text-ink shadow-sm">
-          {article.content_es}
-        </div>
-      </section>
-
-      <section id="formulario" className="bg-paper px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-semibold text-charcoal">
-            ¿Buscas oportunidades alineadas con estas tendencias?
-          </h2>
-          <p className="mt-4 text-ink">
-            Cuéntanos tus necesidades y te presentaremos opciones estratégicas.
-          </p>
-          <div className="mt-10 rounded-lg border border-border bg-cream p-8 text-left shadow-sm md:p-10">
-            <LeadFormD locale="es" id="lead-insight" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/45 to-charcoal/20" />
+        <div className="relative z-10 w-full px-6 pb-10 md:px-10 md:pb-12">
+          <div className="mx-auto max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              {article.category_es}
+              {article.date_es && <span className="text-white/70"> · {article.date_es}</span>}
+            </p>
+            <h1 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white md:text-5xl">{article.title_es}</h1>
           </div>
         </div>
       </section>
+
+      <Section width="narrow">
+        <article className="whitespace-pre-line text-lg leading-relaxed text-ink">{article.content_es}</article>
+        <Link href="/es/insights" className="mt-10 inline-block text-sm font-semibold uppercase tracking-wide text-brand-600 hover:underline">
+          ← Volver a Insights
+        </Link>
+      </Section>
+
+      <CTABand title="¿Buscas oportunidades alineadas con estas tendencias?" text="Cuéntanos tus necesidades y te presentaremos opciones estratégicas." buttonLabel="Solicitar información" />
     </main>
   );
 }

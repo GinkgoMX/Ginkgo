@@ -1,5 +1,6 @@
-import Eyebrow from "@/components/ui/Eyebrow";
 import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
 import LeadFormD from "@/components/LeadFormD";
 import LeadFormB from "@/components/LeadFormB";
 import { MailIcon, WhatsAppIcon, InstagramIcon } from "@/components/ui/icons";
@@ -15,103 +16,68 @@ export const metadata = {
   },
 };
 
+function Channel({ icon, label, children }) {
+  return (
+    <Card className="flex items-start gap-4">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">{icon}</div>
+      <div className="min-w-0">
+        <h2 className="font-serif text-lg font-semibold text-charcoal">{label}</h2>
+        {children}
+      </div>
+    </Card>
+  );
+}
+
+const linkClasses = "mt-1 block truncate text-sm text-ink hover:text-brand-600";
+
+// The contact page is the one place the general form stays embedded — it is
+// what a visitor came here for. Everywhere else it opens in the modal.
 export default async function ContactoES() {
   const { whatsappNumber, whatsappDisplay, email, instagramUrl } = await getContactSettings();
   const whatsappUrl = buildWhatsappUrl(whatsappNumber, GENERIC_MESSAGE.es);
 
   return (
     <main className="bg-cream">
-      <section className="px-6 py-24 text-center md:px-10">
-        <Eyebrow>Hablemos</Eyebrow>
-        <h1 className="mx-auto mt-2 max-w-2xl font-serif text-4xl font-semibold text-charcoal md:text-5xl">
-          Contacto
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-ink">
-          Estamos aquí para ayudarte a encontrar oportunidades estratégicas de desarrollo.
-        </p>
-      </section>
-
-      <section className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 pb-16 md:grid-cols-3 md:px-10">
-        <Card className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">
-            <WhatsAppIcon />
-          </div>
-          <div className="min-w-0">
-            <h3 className="font-serif text-lg font-semibold text-charcoal">WhatsApp</h3>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1 block text-sm text-ink hover:text-brand-600"
-            >
+      <Section spacing="header">
+        <SectionHeader as="h1" eyebrow="Hablemos" title="Contacto" intro="Estamos aquí para ayudarte a encontrar oportunidades estratégicas de desarrollo." />
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Channel icon={<WhatsAppIcon />} label="WhatsApp">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={linkClasses}>
               {whatsappDisplay}
             </a>
-          </div>
-        </Card>
-
-        <Card className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">
-            <MailIcon />
-          </div>
-          <div className="min-w-0">
-            <h3 className="font-serif text-lg font-semibold text-charcoal">Correo</h3>
-            <a
-              href={`mailto:${email}`}
-              title={email}
-              className="mt-1 block text-sm text-ink hover:text-brand-600"
-            >
+          </Channel>
+          <Channel icon={<MailIcon />} label="Correo">
+            <a href={`mailto:${email}`} title={email} className={linkClasses}>
               Enviar correo
             </a>
-          </div>
-        </Card>
-
-        {instagramUrl && (
-          <Card className="flex items-start gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">
-              <InstagramIcon />
-            </div>
-            <div className="min-w-0">
-              <h3 className="font-serif text-lg font-semibold text-charcoal">Instagram</h3>
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 block text-sm text-ink hover:text-brand-600"
-              >
+          </Channel>
+          {instagramUrl && (
+            <Channel icon={<InstagramIcon />} label="Instagram">
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={linkClasses}>
                 {instagramHandle(instagramUrl)}
               </a>
-            </div>
-          </Card>
-        )}
-      </section>
+            </Channel>
+          )}
+        </div>
+      </Section>
 
-      <section id="formulario" className="bg-paper px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-semibold text-charcoal">Contacto</h2>
-          <p className="mt-4 text-ink">
-            Cuéntanos tus necesidades y te presentaremos oportunidades alineadas con tu perfil.
-          </p>
-          <div className="mt-10 rounded-lg border border-border bg-cream p-8 text-left shadow-sm md:p-10">
+      <Section id="formulario" bg="paper" className="scroll-mt-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+          <SectionHeader className="lg:sticky lg:top-28 lg:self-start" title="Envíanos un mensaje" intro="Cuéntanos tus necesidades y te presentaremos oportunidades alineadas con tu perfil." />
+          <div className="rounded-lg border border-border bg-cream p-6 md:p-8">
             <LeadFormD locale="es" id="lead-contacto" />
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section id="promueve-tu-propiedad" className="bg-cream px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Propietarios</Eyebrow>
-          <h2 className="mt-2 font-serif text-3xl font-semibold text-charcoal">
-            ¿Tienes una propiedad que deseas comercializar?
-          </h2>
-          <p className="mt-4 text-ink">
-            Promueve tu propiedad con Ginkgo y nuestro equipo la evaluará para determinar si
-            se ajusta a nuestro perfil de comercialización.
-          </p>
-          <div className="mt-10 rounded-lg border border-border bg-paper p-8 text-left shadow-sm md:p-10">
+      <Section id="promueve-tu-propiedad" className="scroll-mt-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+          <SectionHeader className="lg:sticky lg:top-28 lg:self-start" eyebrow="Propietarios" title="¿Tienes una propiedad que deseas comercializar?" intro="Promueve tu propiedad con Ginkgo y nuestro equipo la evaluará para determinar si se ajusta a nuestro perfil de comercialización." />
+          <div className="rounded-lg border border-border bg-paper p-6 shadow-sm md:p-8">
             <LeadFormB locale="es" id="lead-promover-propiedad" />
           </div>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

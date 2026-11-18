@@ -2,47 +2,39 @@ import Link from "next/link";
 import { getRegions } from "@/lib/sanity/queries";
 import { toLegacyRegion } from "@/lib/sanity/adapters";
 import Photo from "../ui/Photo";
-import Button from "../ui/Button";
-import Eyebrow from "../ui/Eyebrow";
+import Section from "../ui/Section";
+import SectionHeader, { SectionBody } from "../ui/SectionHeader";
+import LeadModalButton from "../LeadModalButton";
 
 export default async function StrategicRegionsEN() {
   const regions = (await getRegions()).map(toLegacyRegion);
 
   return (
-    <section className="bg-paper px-6 py-20 md:px-10">
-      <div className="mx-auto max-w-6xl">
-        <Eyebrow>Coverage</Eyebrow>
-        <h2 className="mt-2 font-serif text-3xl font-semibold text-charcoal md:text-4xl">
-          Strategic Regions
-        </h2>
-        <p className="mt-4 max-w-2xl text-ink">
-          Opportunities across the country's highest-growth corridors.
-        </p>
+    <Section bg="paper">
+      <SectionHeader
+        eyebrow="Coverage"
+        title="Strategic Regions"
+        intro="Opportunities across the country's highest-growth corridors."
+        action={<LeadModalButton variant="outline">Request portfolio</LeadModalButton>}
+      />
 
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {regions.map((region) => (
-            <Link
-              key={region.slug}
-              href={`/en/regions/${region.slug}`}
-              className="group block overflow-hidden rounded-lg border border-border bg-paper shadow-sm transition-shadow hover:shadow-md"
-            >
-              <Photo src={region.heroImage} alt={region.name_en} className="h-56 w-full" />
-              <div className="p-6">
-                <h3 className="font-serif text-xl font-semibold text-charcoal group-hover:text-brand-600">
-                  {region.name_en}
-                </h3>
-                <p className="mt-2 line-clamp-2 text-sm text-ink">{region.description_en}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button href="/en/contact" variant="outline">
-            Request Portfolio
-          </Button>
-        </div>
-      </div>
-    </section>
+      <SectionBody className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {regions.map((region) => (
+          <Link
+            key={region.slug}
+            href={`/en/regions/${region.slug}`}
+            className="group flex flex-col overflow-hidden rounded-lg border border-border bg-paper shadow-sm transition-shadow hover:shadow-md"
+          >
+            <Photo src={region.heroImage} alt={region.name_en} className="h-44 w-full" />
+            <div className="flex-1 p-5">
+              <h3 className="font-serif text-lg font-semibold text-charcoal group-hover:text-brand-600">
+                {region.name_en}
+              </h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink">{region.description_en}</p>
+            </div>
+          </Link>
+        ))}
+      </SectionBody>
+    </Section>
   );
 }

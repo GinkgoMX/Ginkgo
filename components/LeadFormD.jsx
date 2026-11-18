@@ -54,7 +54,7 @@ const inputClasses =
   "w-full rounded-md border border-border bg-paper px-4 py-3 text-charcoal placeholder:text-muted focus:border-brand-600 focus:outline-none";
 const labelClasses = "mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted";
 
-export default function LeadFormD({ locale = "es", id = "lead-d" }) {
+export default function LeadFormD({ locale = "es", id = "lead-d", onSuccess }) {
   const t = COPY[locale] ?? COPY.es;
   const pathname = usePathname();
   const [status, setStatus] = useState("idle");
@@ -77,6 +77,7 @@ export default function LeadFormD({ locale = "es", id = "lead-d" }) {
       await submitLead(formData);
       setStatus("success");
       e.target.reset();
+      onSuccess?.();
     } catch (error) {
       setStatus("error");
       setErrorMessage(error.message);
@@ -90,25 +91,25 @@ export default function LeadFormD({ locale = "es", id = "lead-d" }) {
       </div>
 
       <div>
-        <label className={labelClasses}>{t.name}</label>
-        <input name="name" required maxLength={120} className={inputClasses} />
+        <label htmlFor={`${id}-name`} className={labelClasses}>{t.name}</label>
+        <input id={`${id}-name`} name="name" required maxLength={120} className={inputClasses} />
       </div>
       <div>
-        <label className={labelClasses}>{t.lastName}</label>
-        <input name="lastName" required maxLength={120} className={inputClasses} />
+        <label htmlFor={`${id}-lastName`} className={labelClasses}>{t.lastName}</label>
+        <input id={`${id}-lastName`} name="lastName" required maxLength={120} className={inputClasses} />
       </div>
       <div>
-        <label className={labelClasses}>{t.email}</label>
-        <input name="email" type="email" required maxLength={200} className={inputClasses} />
+        <label htmlFor={`${id}-email`} className={labelClasses}>{t.email}</label>
+        <input id={`${id}-email`} name="email" type="email" required maxLength={200} className={inputClasses} />
       </div>
       <div>
-        <label className={labelClasses}>{t.phone}</label>
-        <input name="phone" type="tel" required maxLength={40} className={inputClasses} />
+        <label htmlFor={`${id}-phone`} className={labelClasses}>{t.phone}</label>
+        <input id={`${id}-phone`} name="phone" type="tel" required maxLength={40} className={inputClasses} />
       </div>
 
       <div className="md:col-span-2">
-        <label className={labelClasses}>{t.reason}</label>
-        <select name="contactReason" className={inputClasses} defaultValue="">
+        <label htmlFor={`${id}-contactReason`} className={labelClasses}>{t.reason}</label>
+        <select id={`${id}-contactReason`} name="contactReason" className={inputClasses} defaultValue="">
           <option value="" disabled>
             —
           </option>
@@ -121,16 +122,16 @@ export default function LeadFormD({ locale = "es", id = "lead-d" }) {
       </div>
 
       <div className="md:col-span-2">
-        <label className={labelClasses}>{t.message}</label>
-        <textarea name="message" rows={3} maxLength={2000} className={inputClasses} />
+        <label htmlFor={`${id}-message`} className={labelClasses}>{t.message}</label>
+        <textarea id={`${id}-message`} name="message" rows={3} maxLength={2000} className={inputClasses} />
       </div>
 
       <div className="md:col-span-2">
         <Button type="submit" disabled={status === "sending"}>
           {status === "sending" ? t.sending : t.submit}
         </Button>
-        {status === "success" && <p className="mt-4 text-sm text-brand-700">{t.success}</p>}
-        {status === "error" && <p className="mt-4 text-sm text-red-600">{errorMessage || t.error}</p>}
+        {status === "success" && <p role="status" className="mt-4 text-sm text-brand-700">{t.success}</p>}
+        {status === "error" && <p role="alert" className="mt-4 text-sm text-red-600">{errorMessage || t.error}</p>}
       </div>
     </form>
   );

@@ -10,16 +10,16 @@ export const metadata = {
 
 export default function CookiesES() {
   return (
-    <main className="min-h-screen bg-cream px-6 py-20 md:px-10">
-      <section className="mx-auto max-w-4xl">
-        <h1 className="mb-6 font-serif text-4xl font-semibold text-charcoal">
+    <main className="min-h-screen bg-cream px-6 py-14 md:px-10 md:py-20">
+      <section className="mx-auto max-w-3xl">
+        <h1 className="mb-4 font-serif text-4xl font-semibold leading-tight text-charcoal md:text-5xl">
           Política de Cookies
         </h1>
-        <p className="mb-8 text-ink">
+        <p className="mb-10 text-lg leading-relaxed text-ink">
           Esta política explica cómo utilizamos cookies y tecnologías similares en nuestro sitio.
         </p>
 
-        <Card className="space-y-6 leading-relaxed text-ink">
+        <Card className="space-y-4 leading-relaxed text-ink">
           <p>
             Utilizamos cookies para mejorar la experiencia de navegación, recordar preferencias
             básicas y analizar el uso del sitio.

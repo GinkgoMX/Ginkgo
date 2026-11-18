@@ -12,17 +12,17 @@ export const metadata = {
 export default async function PrivacidadES() {
   const { email } = await getContactSettings();
   return (
-    <main className="min-h-screen bg-cream px-6 py-20 md:px-10">
-      <section className="mx-auto max-w-4xl">
-        <h1 className="mb-6 font-serif text-4xl font-semibold text-charcoal">
+    <main className="min-h-screen bg-cream px-6 py-14 md:px-10 md:py-20">
+      <section className="mx-auto max-w-3xl">
+        <h1 className="mb-4 font-serif text-4xl font-semibold leading-tight text-charcoal md:text-5xl">
           Aviso de Privacidad
         </h1>
-        <p className="mb-8 text-ink">
+        <p className="mb-10 text-lg leading-relaxed text-ink">
           Este aviso explica cómo Ginkgo recopila, utiliza y protege la información
           proporcionada por los usuarios.
         </p>
 
-        <Card className="space-y-6 leading-relaxed text-ink">
+        <Card className="space-y-4 leading-relaxed text-ink">
           <p>
             Ginkgo recopila datos de contacto proporcionados voluntariamente por el usuario, como
             nombre, correo electrónico, teléfono y empresa.

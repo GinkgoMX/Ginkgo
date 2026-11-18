@@ -2,7 +2,8 @@ import { getMapOpportunities } from "@/lib/sanity/queries";
 import { toLegacyOpportunity } from "@/lib/sanity/adapters";
 import { toPublicMapPoint } from "@/lib/maps";
 import PublicPropertyMap from "@/components/maps/PublicPropertyMapClient";
-import Eyebrow from "@/components/ui/Eyebrow";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { getContactSettings } from "@/lib/siteSettings";
 
 export const revalidate = 60;
@@ -22,19 +23,13 @@ export default async function MapEN() {
 
   return (
     <main className="min-h-screen bg-cream">
-      <section className="px-6 py-16 text-center md:px-10">
-        <Eyebrow>Explore</Eyebrow>
-        <h1 className="mx-auto mt-2 max-w-2xl font-serif text-4xl font-semibold text-charcoal md:text-5xl">
-          Opportunities Map
-        </h1>
-        <p className="mt-4 text-lg text-ink">
-          Locate every opportunity and request information directly from the map.
-        </p>
-      </section>
+      <Section spacing="header">
+        <SectionHeader as="h1" eyebrow="Explore" title="Opportunities Map" intro="Locate every opportunity and request information directly from the map." />
+      </Section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:px-10">
+      <Section spacing="flush-top">
         <PublicPropertyMap properties={properties} locale="en" whatsappNumber={whatsappNumber} />
-      </section>
+      </Section>
     </main>
   );
 }

@@ -1,9 +1,8 @@
 import { getPublicOpportunities } from "@/lib/sanity/queries";
 import { toLegacyOpportunity } from "@/lib/sanity/adapters";
-import Photo from "@/components/ui/Photo";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Eyebrow from "@/components/ui/Eyebrow";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
+import OpportunityCard from "@/components/OpportunityCard";
 import { getSiteText } from "@/lib/siteContent";
 
 export const revalidate = 60;
@@ -24,38 +23,26 @@ export default async function OpportunitiesListES() {
 
   return (
     <main className="min-h-screen bg-cream">
-      <section className="px-6 py-20 text-center md:px-10">
-        <Eyebrow className="justify-center">{t("portfolio.eyebrow", "es")}</Eyebrow>
-        <h1 className="mx-auto mt-2 max-w-2xl font-serif text-4xl font-semibold text-charcoal md:text-5xl">
-          {t("portfolio.title", "es")}
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-ink">{t("portfolio.text.1", "es")}</p>
-        <p className="mx-auto mt-3 max-w-2xl text-ink">{t("portfolio.text.2", "es")}</p>
-      </section>
+      <Section spacing="header">
+        <SectionHeader
+          as="h1"
+          eyebrow={t("portfolio.eyebrow", "es")}
+          title={t("portfolio.title", "es")}
+          intro={[t("portfolio.text.1", "es"), t("portfolio.text.2", "es")]}
+        />
+      </Section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:px-10">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {opportunities.map((op) => (
-            <Card key={op.slug} className="flex flex-col overflow-hidden p-0">
-              <Photo src={op.image} alt={op.name_es} className="h-48 w-full" />
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-serif text-xl font-semibold text-charcoal">{op.name_es}</h3>
-                <p className="mt-1 text-sm text-muted">{op.city_es}</p>
-                {op.briefDescription_es && <p className="mt-3 text-sm text-ink">{op.briefDescription_es}</p>}
-                {op.surface && <p className="mt-3 text-sm text-ink">Superficie: {op.surface}</p>}
-                {op.vocation_es && <p className="text-sm text-ink">Vocación: {op.vocation_es}</p>}
-                <div className="mb-4" />
-                <Button href={`/es/oportunidades/${op.slug}`} variant="outline" className="mt-auto self-start">
-                  Ver oportunidad
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-        {opportunities.length === 0 && (
-          <p className="text-center text-muted">Próximamente nuevas oportunidades.</p>
+      <Section spacing="flush-top">
+        {opportunities.length === 0 ? (
+          <p className="text-muted">Próximamente nuevas oportunidades.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {opportunities.map((op) => (
+              <OpportunityCard key={op.slug} op={op} locale="es" />
+            ))}
+          </div>
         )}
-      </section>
+      </Section>
     </main>
   );
 }

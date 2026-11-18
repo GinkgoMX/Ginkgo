@@ -1,7 +1,9 @@
 import NavbarES from "@/components/es/NavbarES";
 import FooterES from "@/components/es/FooterES";
 import FixedCTA from "@/components/FixedCTA";
+import LeadModal from "@/components/LeadModal";
 import { getContactSettings } from "@/lib/siteSettings";
+import { getSiteText } from "@/lib/siteContent";
 import SetHtmlLang from "@/components/SetHtmlLang";
 
 export const metadata = {
@@ -25,6 +27,7 @@ export const metadata = {
 
 export default async function LayoutES({ children }) {
   const { whatsappNumber } = await getContactSettings();
+  const t = await getSiteText();
 
   return (
     <>
@@ -33,6 +36,7 @@ export default async function LayoutES({ children }) {
       {children}
       <FooterES />
       <FixedCTA whatsappNumber={whatsappNumber} />
+      <LeadModal locale="es" title={t("home.hero.formTitle", "es")} subtitle={t("home.hero.formText", "es")} />
     </>
   );
 }
