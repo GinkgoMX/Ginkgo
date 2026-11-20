@@ -44,6 +44,26 @@ export const siteContent = defineType({
       ],
     }),
     defineField({
+      name: 'communityGallery',
+      title: 'Galería — Comunidad (Inicio)',
+      description: 'Hasta 6 imágenes. Se gestiona desde /admin/contenido.',
+      type: 'array',
+      group: 'home',
+      validation: (r) => r.max(6),
+      of: [
+        {
+          type: 'object',
+          name: 'communityImage',
+          fields: [
+            defineField({name: 'image', title: 'Imagen', type: 'image', options: {hotspot: true}}),
+            defineField({name: 'alt', title: 'Descripción (accesibilidad)', type: 'localeString'}),
+            defineField({name: 'link', title: 'Enlace a la publicación', type: 'url'}),
+          ],
+          preview: {select: {title: 'alt.es', subtitle: 'link', media: 'image'}},
+        },
+      ],
+    }),
+    defineField({
       name: 'sections',
       title: 'Secciones informativas',
       description: 'Bloques reutilizables de texto + imagen para las páginas de contenido.',

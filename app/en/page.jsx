@@ -4,7 +4,7 @@ import BrandTagline from "@/components/BrandTagline";
 import WhyGinkgoEN from "@/components/en/WhyGinkgoEN";
 import ProcessEN from "@/components/en/ProcessEN";
 import StrategicRegionsEN from "@/components/en/StrategicRegionsEN";
-import InstagramFeedEN from "@/components/en/InstagramFeedEN";
+import CommunitySection from "@/components/CommunitySection";
 import CustomSearchFormEN from "@/components/en/CustomSearchFormEN";
 import ProjectCTAEN from "@/components/en/ProjectCTAEN";
 
@@ -31,8 +31,8 @@ export default function HomeEN() {
       {/* 5. Strategic Regions */}
       <StrategicRegionsEN />
 
-      {/* 6. Instagram */}
-      <InstagramFeedEN />
+      {/* 6. Community */}
+      <CommunitySection locale="en" />
 
       {/* 7. Didn’t find what you’re looking for? */}
       <CustomSearchFormEN />

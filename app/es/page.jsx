@@ -4,7 +4,7 @@ import BrandTagline from "@/components/BrandTagline";
 import WhyGinkgoES from "@/components/es/WhyGinkgoES";
 import ProcessES from "@/components/es/ProcessES";
 import StrategicRegionsES from "@/components/es/StrategicRegionsES";
-import InstagramFeedES from "@/components/es/InstagramFeedES";
+import CommunitySection from "@/components/CommunitySection";
 import CustomSearchFormES from "@/components/es/CustomSearchFormES";
 import ProjectCTAES from "@/components/es/ProjectCTAES";
 
@@ -19,7 +19,7 @@ export default function HomeES() {
       <WhyGinkgoES />
       <ProcessES />
       <StrategicRegionsES />
-      <InstagramFeedES />
+      <CommunitySection locale="es" />
       <CustomSearchFormES />
       <ProjectCTAES />
     </>

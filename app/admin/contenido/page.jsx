@@ -1,11 +1,13 @@
 import { getContentOverrides } from "@/lib/siteContent";
 import { CONTENT_GROUPS } from "@/lib/siteContentCatalog";
 import ContentForm from "@/components/admin/ContentForm";
+import GalleryForm from "@/components/admin/GalleryForm";
+import { getAdminCommunityGallery } from "@/lib/sanity/queries";
 
 export const metadata = { title: "Contenido del sitio" };
 
 export default async function ContenidoPage() {
-  const overrides = await getContentOverrides();
+  const [overrides, gallery] = await Promise.all([getContentOverrides(), getAdminCommunityGallery()]);
 
   // Prefill with what the site shows right now (the admin's text or the original).
   const groups = CONTENT_GROUPS.map((g) => ({
@@ -30,6 +32,7 @@ export default async function ContenidoPage() {
         Edita los textos de la página de inicio, Nosotros y Servicios, en español e inglés. Si dejas un
         campo vacío, el sitio vuelve a mostrar el texto original.
       </p>
+      <GalleryForm initialItems={gallery} />
       <ContentForm groups={groups} />
     </div>
   );
