@@ -21,7 +21,7 @@ function Channel({ icon, label, children }) {
     <Card className="flex items-start gap-4">
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">{icon}</div>
       <div className="min-w-0">
-        <h2 className="font-serif text-lg font-semibold text-charcoal">{label}</h2>
+        <h2 className="font-display text-2xl font-medium text-charcoal">{label}</h2>
         {children}
       </div>
     </Card>

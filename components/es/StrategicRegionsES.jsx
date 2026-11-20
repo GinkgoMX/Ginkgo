@@ -23,14 +23,26 @@ export default async function StrategicRegionsES() {
           <Link
             key={region.slug}
             href={`/es/regiones/${region.slug}`}
-            className="group flex flex-col overflow-hidden rounded-lg border border-border bg-paper shadow-sm transition-shadow hover:shadow-md"
+            className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-charcoal"
           >
-            <Photo src={region.heroImage} alt={region.name_es} className="h-44 w-full" />
-            <div className="flex-1 p-5">
-              <h3 className="font-serif text-lg font-semibold text-charcoal group-hover:text-brand-600">
+            <div className="media-zoom absolute inset-0">
+              <Photo
+                src={region.heroImage}
+                alt={region.name_es}
+                fallback="dark"
+                className="absolute inset-0"
+                sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-7">
+              <span className="block h-px w-8 bg-gold transition-all duration-700 ease-out-expo group-hover:w-14" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.01em] text-white">
                 {region.name_es}
               </h3>
-              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink">{region.description_es}</p>
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+                {region.description_es}
+              </p>
             </div>
           </Link>
         ))}

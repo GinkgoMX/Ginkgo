@@ -16,10 +16,21 @@ export default function Photo({
   height,
   priority = false,
   sizes,
+  // "light" (pale brand gradient) or "dark" (navy with contour lines, used
+  // on cards and heroes so a missing photo still looks deliberate).
+  fallback = "light",
 }) {
   const isRemote = typeof src === "string" && /^https?:\/\//.test(src);
   const exists =
     isRemote || (Boolean(src) && fs.existsSync(path.join(process.cwd(), "public", src)));
+
+  if (!exists && fallback === "dark") {
+    return (
+      <div className={`media-fallback flex items-end ${className}`} role="img" aria-label={alt}>
+        <span className="m-6 font-serif text-[10px] font-semibold uppercase tracking-[0.4em] text-white/35">Ginkgo</span>
+      </div>
+    );
+  }
 
   if (!exists) {
     return (

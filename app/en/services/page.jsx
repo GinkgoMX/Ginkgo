@@ -33,7 +33,7 @@ export default async function ServicesEN() {
         <div className="mt-10 grid grid-cols-1 gap-8 border-t border-border pt-8 md:grid-cols-2 md:gap-12">
           {approach.map((item) => (
             <div key={item.title}>
-              <h2 className="font-serif text-lg font-semibold text-charcoal">{item.title}</h2>
+              <h2 className="font-display text-2xl font-medium text-charcoal">{item.title}</h2>
               <p className="mt-2 leading-relaxed text-ink">{item.text}</p>
             </div>
           ))}
@@ -48,7 +48,7 @@ export default async function ServicesEN() {
               <span className="font-serif text-sm font-semibold tracking-wide text-gold-700">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 font-serif text-xl font-semibold leading-snug text-charcoal">{service.title}</h3>
+              <h3 className="mt-3 font-display text-2xl font-medium leading-[1.15] text-charcoal">{service.title}</h3>
               <span className="mt-4 block h-[2px] w-8 bg-gold" aria-hidden="true" />
               <p className="mt-4 leading-relaxed text-ink">{service.text}</p>
             </Card>

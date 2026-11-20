@@ -138,7 +138,7 @@ export default function LeadModal({ locale = "es", title, subtitle }) {
           id="lead-modal-title"
           ref={titleRef}
           tabIndex={-1}
-          className="mt-4 pr-10 font-serif text-2xl font-semibold leading-tight text-charcoal focus:outline-none md:text-3xl"
+          className="mt-4 pr-10 font-display text-3xl font-medium leading-[1.1] text-charcoal focus:outline-none md:text-4xl"
         >
           {heading}
         </h2>

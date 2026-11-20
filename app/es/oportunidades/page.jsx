@@ -36,9 +36,9 @@ export default async function OpportunitiesListES() {
         {opportunities.length === 0 ? (
           <p className="text-muted">Próximamente nuevas oportunidades.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {opportunities.map((op) => (
-              <OpportunityCard key={op.slug} op={op} locale="es" />
+          <div data-reveal-stagger className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {opportunities.map((op, index) => (
+              <OpportunityCard key={op.slug} op={op} locale="es" index={index} />
             ))}
           </div>
         )}

@@ -13,15 +13,16 @@ export default async function ProcessES() {
         title={t("home.process.title", "es")}
         intro={t("home.process.subtitle", "es")}
       />
-      <SectionBody>
-        <ol className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      <SectionBody stagger={false}>
+        <ol data-reveal-stagger className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <li key={step.title} className="flex flex-col items-center text-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold font-serif text-lg font-semibold text-charcoal">
+            <li key={step.title} className="relative border-t border-charcoal/15 pt-8">
+              <span className="absolute -top-[3px] left-0 h-[5px] w-[5px] rounded-full bg-gold" aria-hidden="true" />
+              <span className="font-display text-6xl font-medium italic leading-none text-brand-600/25">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 font-serif text-lg font-semibold leading-snug text-charcoal">{step.title}</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink">{step.text}</p>
+              <h3 className="mt-5 font-display text-2xl font-medium leading-[1.15] text-charcoal">{step.title}</h3>
+              <p className="mt-3 max-w-xs text-sm leading-[1.8] text-ink">{step.text}</p>
             </li>
           ))}
         </ol>

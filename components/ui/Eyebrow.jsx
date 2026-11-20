@@ -6,9 +6,9 @@ export default function Eyebrow({ children, className = "" }) {
   const centered = /(^|\s)justify-center(\s|$)/.test(className);
   return (
     <p
-      className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600 md:text-sm ${className}`}
+      className={`flex items-center gap-3 font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-600 md:text-xs ${className}`}
     >
-      <span className={`h-[2px] w-5 shrink-0 bg-gold ${centered ? "hidden md:block" : ""}`} aria-hidden="true" />
+      <span className={`h-px w-8 shrink-0 bg-gold ${centered ? "hidden md:block" : ""}`} aria-hidden="true" />
       <span className={centered ? "text-center" : ""}>{children}</span>
     </p>
   );

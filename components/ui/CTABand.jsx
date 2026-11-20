@@ -7,19 +7,25 @@ import LeadModalButton from "../LeadModalButton";
 export default function CTABand({ title, text, buttonLabel, secondary, bg = "charcoal" }) {
   const dark = bg === "charcoal" || bg === "teal";
   return (
-    <Section bg={bg} spacing="compact" width="narrow" innerClassName="text-center">
-      <span className="mx-auto mb-5 block h-[2px] w-10 bg-gold" aria-hidden="true" />
-      <h2 className={`font-serif text-3xl font-semibold leading-tight md:text-4xl ${dark ? "text-white" : "text-charcoal"}`}>
-        {title}
-      </h2>
-      {text && <p className={`mx-auto mt-4 max-w-2xl text-lg leading-relaxed ${dark ? "text-white/75" : "text-ink"}`}>{text}</p>}
-      <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <LeadModalButton variant={dark ? "light" : "primary"}>{buttonLabel}</LeadModalButton>
-        {secondary && (
-          <Button href={secondary.href} variant={dark ? "ghost" : "outline"}>
-            {secondary.label}
-          </Button>
+    <Section bg={bg} spacing="default" width="narrow" innerClassName="text-center">
+      <div data-reveal>
+        <span className="mx-auto mb-8 block h-px w-12 bg-gold" aria-hidden="true" />
+        <h2
+          className={`font-display text-4xl font-medium leading-[1.08] tracking-[-0.01em] md:text-5xl ${dark ? "text-white" : "text-charcoal"}`}
+        >
+          {title}
+        </h2>
+        {text && (
+          <p className={`mx-auto mt-6 max-w-2xl text-lg leading-[1.8] ${dark ? "text-white/75" : "text-ink"}`}>{text}</p>
         )}
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <LeadModalButton variant={dark ? "light" : "primary"}>{buttonLabel}</LeadModalButton>
+          {secondary && (
+            <Button href={secondary.href} variant={dark ? "ghost" : "outline"}>
+              {secondary.label}
+            </Button>
+          )}
+        </div>
       </div>
     </Section>
   );

@@ -18,9 +18,9 @@ export default async function FeaturedOpportunitiesES() {
         intro={[t("portfolio.text.1", "es"), t("portfolio.text.2", "es")]}
         action={<Button href="/es/oportunidades">{t("portfolio.button", "es")}</Button>}
       />
-      <SectionBody className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {featured.map((op) => (
-          <OpportunityCard key={op.slug} op={op} locale="es" showAdvantages />
+      <SectionBody className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {featured.map((op, index) => (
+          <OpportunityCard key={op.slug} op={op} locale="es" index={index} showAdvantages />
         ))}
       </SectionBody>
     </Section>

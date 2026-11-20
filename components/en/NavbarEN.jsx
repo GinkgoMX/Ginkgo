@@ -18,7 +18,7 @@ export default function NavbarEN() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-charcoal">
+    <header className="sticky top-0 z-40 w-full bg-charcoal/95 backdrop-blur-md supports-[backdrop-filter]:bg-charcoal/85">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Link href="/en" className="flex items-center py-1">
           <span className="relative h-10 w-[60px] shrink-0">
@@ -26,12 +26,12 @@ export default function NavbarEN() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-8 text-sm font-medium md:flex">
+        <div className="hidden items-center gap-9 font-serif text-[12px] font-medium tracking-[0.06em] md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-white transition-colors duration-300 hover:text-gold"
+              className="underline-draw text-white/90 hover:text-white"
             >
               {link.label}
             </Link>

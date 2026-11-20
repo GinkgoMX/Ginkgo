@@ -14,7 +14,7 @@ export default async function PrivacyEN() {
   return (
     <main className="min-h-screen bg-cream px-6 py-14 md:px-10 md:py-20">
       <section className="mx-auto max-w-3xl">
-        <h1 className="mb-4 font-serif text-4xl font-semibold leading-tight text-charcoal md:text-5xl">Privacy Notice</h1>
+        <h1 className="mb-6 font-display text-5xl font-medium leading-[1.04] tracking-[-0.015em] text-charcoal md:text-6xl">Privacy Notice</h1>
         <p className="mb-10 text-lg leading-relaxed text-ink">
           This notice summarizes how Ginkgo collects, uses, and protects user information.
         </p>

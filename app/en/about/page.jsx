@@ -28,7 +28,7 @@ export default async function AboutEN() {
             <p>{t("about.vision.2", "en")}</p>
             <p>{t("about.vision.3", "en")}</p>
           </div>
-          <blockquote className="self-start border-l-2 border-gold pl-6 font-serif text-xl italic leading-relaxed text-charcoal md:text-2xl lg:sticky lg:top-28">
+          <blockquote className="self-start border-l-2 border-gold pl-6 font-display text-2xl italic leading-[1.4] text-charcoal md:text-3xl lg:sticky lg:top-28">
             {t("about.question", "en")}
           </blockquote>
         </div>

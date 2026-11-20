@@ -48,11 +48,11 @@ export default async function OpportunityDetailEN({ params }) {
   return (
     <main className="bg-cream">
       <section className="relative flex h-[50vh] min-h-[360px] items-center justify-center overflow-hidden">
-        <Photo src={opportunity.heroImage} alt={opportunity.name_en} className="absolute inset-0" priority />
+        <Photo src={opportunity.heroImage} alt={opportunity.name_en} className="hero-media absolute inset-0" fallback="dark" priority />
         <div className="absolute inset-0 bg-charcoal/50" />
-        <div className="relative z-10 flex max-w-3xl flex-col items-center px-6 text-center">
+        <div className="hero-rise relative z-10 flex max-w-4xl flex-col items-center px-6 text-center">
           <Eyebrow className="justify-center text-white/80">Development opportunity</Eyebrow>
-          <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight text-white md:text-5xl">{opportunity.name_en}</h1>
+          <h1 className="mt-5 font-display text-5xl font-medium leading-[1.04] tracking-[-0.015em] text-white md:text-7xl">{opportunity.name_en}</h1>
           {opportunity.briefDescription_en && (
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">{opportunity.briefDescription_en}</p>
           )}
@@ -66,7 +66,7 @@ export default async function OpportunityDetailEN({ params }) {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-12">
           <aside className="lg:order-2">
             <Card className="lg:sticky lg:top-28">
-              <h2 className="font-serif text-lg font-semibold text-charcoal">Essential Information</h2>
+              <h2 className="font-display text-2xl font-medium text-charcoal">Essential Information</h2>
               {facts.length > 0 && (
                 <dl className="mt-4 divide-y divide-border border-t border-border">
                   {facts.map(([label, value]) => (

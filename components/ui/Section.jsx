@@ -1,9 +1,9 @@
 // The one place the site's vertical rhythm and content widths are defined.
 // Every public section goes through this so spacing stays identical page to
 // page:
-//   spacing "default"  — regular section            56px mobile / 80px desktop
-//   spacing "compact"  — bands (tagline, CTA)       48px / 64px
-//   spacing "header"   — interior page header       56/80 top, 40/48 bottom
+//   spacing "default"  — regular section            80px mobile / 128px desktop
+//   spacing "compact"  — bands                      64px / 80px
+//   spacing "header"   — interior page header       80/128 top, 48/64 bottom
 //   spacing "flush-top"— section that continues the one above (same bg)
 // Widths: "wide" is the site grid (cards, maps); "narrow" is for reading text
 // and forms, so long paragraphs never exceed ~75 characters per line.
@@ -15,10 +15,10 @@ const backgrounds = {
 };
 
 const spacings = {
-  default: "py-14 md:py-20",
-  compact: "py-12 md:py-16",
-  header: "pt-14 pb-10 md:pt-20 md:pb-12",
-  "flush-top": "pt-0 pb-14 md:pb-20",
+  default: "py-20 md:py-32",
+  compact: "py-16 md:py-20",
+  header: "pt-20 pb-12 md:pt-32 md:pb-16",
+  "flush-top": "pt-0 pb-20 md:pb-32",
 };
 
 const widths = {

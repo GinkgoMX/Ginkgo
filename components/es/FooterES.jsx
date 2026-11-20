@@ -20,7 +20,7 @@ export default async function FooterES() {
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-3">
         <div>
-          <h3 className="mb-4 font-serif text-lg font-semibold text-brand-600">Contacto</h3>
+          <h3 className="mb-5 font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-600">Contacto</h3>
           <ul className="space-y-3 text-sm text-ink">
             <li className="flex items-start gap-2">
               <WhatsAppIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
@@ -42,7 +42,7 @@ export default async function FooterES() {
         </div>
 
         <div>
-          <h3 className="mb-4 font-serif text-lg font-semibold text-brand-600">Síguenos</h3>
+          <h3 className="mb-5 font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-600">Síguenos</h3>
           <ul className="space-y-3 text-sm text-ink">
             {instagramUrl && (
               <li className="flex items-start gap-2">
@@ -73,7 +73,7 @@ export default async function FooterES() {
         </div>
 
         <div>
-          <h3 className="mb-4 font-serif text-lg font-semibold text-brand-600">Legal</h3>
+          <h3 className="mb-5 font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-600">Legal</h3>
           <ul className="space-y-2 text-sm text-ink">
             <li>
               <Link href="/es/privacidad" className="hover:text-brand-600">

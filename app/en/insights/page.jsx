@@ -38,7 +38,7 @@ export default async function InsightsEN() {
                   <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">
                     {article.category_en}
                   </span>
-                  <h2 className="mt-2 font-serif text-xl font-semibold leading-snug text-charcoal">
+                  <h2 className="mt-3 font-display text-2xl font-medium leading-[1.15] text-charcoal">
                     {article.title_en}
                   </h2>
                   <p className="mt-1 text-sm text-muted">{article.date_en}</p>

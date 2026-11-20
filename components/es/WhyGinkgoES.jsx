@@ -1,4 +1,3 @@
-import Card from "../ui/Card";
 import Section from "../ui/Section";
 import SectionHeader, { SectionBody } from "../ui/SectionHeader";
 import { getSiteText } from "@/lib/siteContent";
@@ -11,12 +10,15 @@ export default async function WhyGinkgoES() {
   return (
     <Section bg="paper">
       <SectionHeader eyebrow={t("home.why.eyebrow", "es")} title={t("home.why.title", "es")} />
-      <SectionBody className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {items.map((item) => (
-          <Card key={item.title}>
-            <h3 className="font-serif text-xl font-semibold text-brand-600">{item.title}</h3>
-            <p className="mt-3 leading-relaxed text-ink">{item.text}</p>
-          </Card>
+      <SectionBody className="grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
+        {items.map((item, index) => (
+          <div key={item.title} className="border-t border-border pt-8">
+            <span className="font-display text-2xl italic text-gold-700">{String(index + 1).padStart(2, "0")}</span>
+            <h3 className="mt-3 font-display text-3xl font-medium leading-[1.12] tracking-[-0.01em] text-charcoal">
+              {item.title}
+            </h3>
+            <p className="mt-4 max-w-md leading-[1.8] text-ink">{item.text}</p>
+          </div>
         ))}
       </SectionBody>
     </Section>

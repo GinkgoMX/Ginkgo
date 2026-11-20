@@ -9,9 +9,9 @@ import { getSiteText } from "@/lib/siteContent";
 export default async function HeroES() {
   const t = await getSiteText();
   return (
-    <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden">
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        className="hero-media absolute inset-0 h-full w-full object-cover"
         src="/videos/hero-vid.mp4"
         poster="/videos/hero-poster.jpg"
         autoPlay
@@ -22,16 +22,17 @@ export default async function HeroES() {
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-charcoal/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal/60" />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 py-20 text-center text-white">
+      <div className="hero-rise relative z-10 mx-auto max-w-4xl px-6 py-24 text-center text-white">
         <Eyebrow className="justify-center text-white/80">{t("home.hero.eyebrow", "es")}</Eyebrow>
-        <h1 className="mt-4 font-serif text-4xl font-medium leading-tight md:text-6xl">
+        <h1 className="mt-6 font-display text-5xl font-medium leading-[1.02] tracking-[-0.02em] md:text-7xl lg:text-[5.5rem]">
           {t("home.hero.title", "es")}
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/85">
+        <p className="mx-auto mt-7 max-w-xl text-lg leading-[1.8] text-white/80">
           {t("home.hero.subtitle", "es")}
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Button href="/es/oportunidades">Explorar oportunidades</Button>
           <LeadModalButton variant="ghost">Solicitar información</LeadModalButton>
         </div>

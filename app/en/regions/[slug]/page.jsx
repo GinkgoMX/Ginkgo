@@ -33,11 +33,11 @@ export default async function RegionDetailEN({ params }) {
   return (
     <main className="bg-cream">
       <section className="relative flex h-[45vh] min-h-[320px] items-center justify-center overflow-hidden">
-        <Photo src={region.heroImage} alt={region.name_en} className="absolute inset-0" priority />
+        <Photo src={region.heroImage} alt={region.name_en} className="hero-media absolute inset-0" fallback="dark" priority />
         <div className="absolute inset-0 bg-charcoal/50" />
-        <div className="relative z-10 px-6 text-center">
+        <div className="hero-rise relative z-10 px-6 text-center">
           <Eyebrow className="justify-center text-white/80">Strategic region</Eyebrow>
-          <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight text-white md:text-5xl">{region.name_en}</h1>
+          <h1 className="mt-5 font-display text-5xl font-medium leading-[1.04] tracking-[-0.015em] text-white md:text-7xl">{region.name_en}</h1>
         </div>
       </section>
 

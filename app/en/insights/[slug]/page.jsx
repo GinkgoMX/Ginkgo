@@ -30,15 +30,15 @@ export default async function InsightDetailEN({ params }) {
   return (
     <main className="bg-cream">
       <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden">
-        <Photo src={article.image} alt={article.title_en} className="absolute inset-0" priority />
+        <Photo src={article.image} alt={article.title_en} className="hero-media absolute inset-0" fallback="dark" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/45 to-charcoal/20" />
         <div className="relative z-10 w-full px-6 pb-10 md:px-10 md:pb-12">
-          <div className="mx-auto max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          <div className="hero-rise mx-auto max-w-3xl">
+            <p className="font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-gold md:text-xs">
               {article.category_en}
               {article.date_en && <span className="text-white/70"> · {article.date_en}</span>}
             </p>
-            <h1 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white md:text-5xl">{article.title_en}</h1>
+            <h1 className="mt-5 font-display text-4xl font-medium leading-[1.06] tracking-[-0.01em] text-white md:text-6xl">{article.title_en}</h1>
           </div>
         </div>
       </section>
