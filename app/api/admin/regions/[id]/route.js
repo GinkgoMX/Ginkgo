@@ -46,6 +46,37 @@ export async function PUT(request, { params }) {
   return NextResponse.json({ id, slug: fields.slug.current });
 }
 
+// One-click "Mostrar / Ocultar" from the Regiones list.
+export async function PATCH(request, { params }) {
+  const auth = await requireApiRole([ROLES.ADMIN, ROLES.ASSISTANT]);
+  if (auth.error) return auth.error;
+  const { id } = await params;
+
+  const body = await request.json().catch(() => ({}));
+  if (typeof body.visible !== "boolean") {
+    return NextResponse.json({ error: "Falta el campo 'visible'." }, { status: 400 });
+  }
+
+  const existing = await sanityWriteClient.fetch(
+    `*[_type == "region" && _id == $id][0]{ "slug": slug.current, "label": name.es }`,
+    { id }
+  );
+  if (!existing) {
+    return NextResponse.json({ error: "Región no encontrada." }, { status: 404 });
+  }
+
+  await sanityWriteClient.patch(id).set({ hidden: !body.visible }).commit();
+
+  await logActivity(auth.session, body.visible ? "publish" : "unpublish", {
+    type: "region",
+    id,
+    label: existing.label,
+  });
+  revalidateRegionPaths(existing.slug);
+
+  return NextResponse.json({ id, hidden: !body.visible });
+}
+
 export async function DELETE(request, { params }) {
   const auth = await requireApiRole([ROLES.ADMIN, ROLES.ASSISTANT]);
   if (auth.error) return auth.error;

@@ -57,6 +57,49 @@ export async function PUT(request, { params }) {
   return NextResponse.json({ id, slug: fields.slug.current });
 }
 
+// One-click "Mostrar / Ocultar" from the Propiedades list. A property is on
+// the public site only while its status is "disponible", so hiding it means
+// "oculto" and showing it means "disponible". Reservado/vendido aren't
+// toggled here — changing those is a business decision made in the full form.
+export async function PATCH(request, { params }) {
+  const auth = await requireApiRole([ROLES.ADMIN, ROLES.ASSISTANT]);
+  if (auth.error) return auth.error;
+  const { id } = await params;
+
+  const body = await request.json().catch(() => ({}));
+  if (typeof body.visible !== "boolean") {
+    return NextResponse.json({ error: "Falta el campo 'visible'." }, { status: 400 });
+  }
+
+  const existing = await sanityWriteClient.fetch(
+    `*[_type == "opportunity" && _id == $id][0]{ status, "slug": slug.current, "label": name.es }`,
+    { id }
+  );
+  if (!existing) {
+    return NextResponse.json({ error: "Propiedad no encontrada." }, { status: 404 });
+  }
+  if (!["disponible", "oculto"].includes(existing.status || "disponible")) {
+    return NextResponse.json(
+      { error: "Solo se puede mostrar u ocultar una propiedad disponible u oculta. Cambia el estado desde Editar." },
+      { status: 409 }
+    );
+  }
+
+  const status = body.visible ? "disponible" : "oculto";
+  await sanityWriteClient.patch(id).set({ status }).commit();
+
+  await logActivity(auth.session, body.visible ? "publish" : "unpublish", {
+    type: "opportunity",
+    id,
+    label: existing.label,
+  });
+  revalidateOpportunityPaths(existing.slug);
+  revalidatePath("/es/mapa");
+  revalidatePath("/en/map");
+
+  return NextResponse.json({ id, status });
+}
+
 export async function DELETE(request, { params }) {
   const auth = await requireApiRole([ROLES.ADMIN, ROLES.ASSISTANT]);
   if (auth.error) return auth.error;

@@ -35,6 +35,13 @@ export const region = defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'hidden',
+      title: 'Oculta en el sitio',
+      description: 'Si está activado, la región no aparece en la web pública.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'order',
       title: 'Orden de despliegue',
       description: 'Número menor aparece primero.',

@@ -4,6 +4,7 @@ import Photo from "@/components/ui/Photo";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import DeleteButton from "@/components/admin/DeleteButton";
+import VisibilityToggle from "@/components/admin/VisibilityToggle";
 
 export const metadata = { title: "Regiones" };
 
@@ -31,6 +32,13 @@ export default async function RegionesPage() {
                 <p className="mt-1 text-sm text-muted">
                   {region.propertyCount} {region.propertyCount === 1 ? "propiedad" : "propiedades"}
                 </p>
+                <div className="mt-3">
+                  <VisibilityToggle
+                    endpoint={`/api/admin/regions/${region._id}`}
+                    visible={region.hidden !== true}
+                    label={region.name?.es}
+                  />
+                </div>
                 <div className="mt-auto flex items-center justify-between pt-4">
                   <Link href={`/admin/regiones/${region._id}`} className="text-sm text-brand-600 hover:underline">
                     Editar

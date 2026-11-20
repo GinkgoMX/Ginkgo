@@ -3,6 +3,7 @@ import { getAdminOpportunities } from "@/lib/sanity/queries";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import DeleteButton from "@/components/admin/DeleteButton";
+import VisibilityToggle from "@/components/admin/VisibilityToggle";
 
 export const metadata = { title: "Propiedades" };
 
@@ -41,6 +42,7 @@ export default async function PropiedadesPage() {
                 <th className="px-6 py-3">Región</th>
                 <th className="px-6 py-3">Superficie</th>
                 <th className="px-6 py-3">Estado</th>
+                <th className="px-6 py-3">En el sitio</th>
                 <th className="px-6 py-3">Actualizada</th>
                 <th className="px-6 py-3 text-right">Acciones</th>
               </tr>
@@ -58,6 +60,19 @@ export default async function PropiedadesPage() {
                     <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${STATUS_STYLES[p.status] || ""}`}>
                       {STATUS_LABELS[p.status] || p.status}
                     </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    {["disponible", "oculto"].includes(p.status || "disponible") ? (
+                      <VisibilityToggle
+                        endpoint={`/api/admin/properties/${p._id}`}
+                        visible={(p.status || "disponible") === "disponible"}
+                        label={p.name?.es}
+                      />
+                    ) : (
+                      <span className="text-sm text-muted" title="Solo las propiedades disponibles aparecen en el sitio">
+                        No ({STATUS_LABELS[p.status] || p.status})
+                      </span>
+                    )}
                   </td>
                   <td className="px-6 py-4 text-muted">
                     {new Date(p._updatedAt).toLocaleDateString("es-MX")}

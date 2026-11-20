@@ -34,8 +34,14 @@ export default function Photo({
   }
 
   if (fill) {
+    // The wrapper must be positioned for next/image's `fill`. Only add
+    // `relative` when the caller hasn't positioned it already: Tailwind emits
+    // `.relative` after `.absolute`, so "relative absolute inset-0" resolved
+    // to relative, the wrapper collapsed to 0px tall, and every detail-page
+    // hero (opportunities, regions, insights) rendered with no photo.
+    const positioned = /(^|\s)(absolute|fixed|sticky)(\s|$)/.test(className);
     return (
-      <div className={`relative overflow-hidden ${className}`}>
+      <div className={`${positioned ? "" : "relative"} overflow-hidden ${className}`}>
         <Image
           src={src}
           alt={alt}

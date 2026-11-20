@@ -30,6 +30,7 @@ Needs `.env.local` (never commit it). Variable names:
 | `RESEND_API_KEY` | Lead notification + auto-reply emails |
 | `APP_BASE_URL` | Public site URL (`https://ginkgomx.com` in production) |
 | `AUTH0_DOMAIN`, `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_SECRET` | Admin login (generate a new `AUTH0_SECRET` for production) |
+| `AUTH0_MGMT_CLIENT_ID`, `AUTH0_MGMT_CLIENT_SECRET` | Optional. Machine-to-Machine app with only `read:users` on the Auth0 Management API — powers the Usuarios roster |
 
 `SMTP_*` / `EMAIL_*` entries in the local file are not used by the code.
 
@@ -63,7 +64,7 @@ Needs `.env.local` (never commit it). Variable names:
 | Insights | Admin, Assistant | Articles (ES/EN), shown on `/es/insights`, `/en/insights` and the sitemap |
 | Contenido del sitio | Admin, Assistant | Homepage hero, "¿Por qué Ginkgo?", process, final CTA, Nosotros and Servicios texts (ES/EN). Empty field = original text |
 | Configuración | Admin only | WhatsApp number, phone, email (also the lead-notification recipient), Instagram, LinkedIn, address |
-| Usuarios | Admin only | Placeholder ("coming soon"); users are managed in Auth0 |
+| Usuarios | Admin only | Read-only roster from Auth0 (role, last login, last CRM change); users and roles are still created/edited in Auth0. Needs `AUTH0_MGMT_CLIENT_ID`/`AUTH0_MGMT_CLIENT_SECRET` |
 
 ## Key technical decisions and gotchas
 
@@ -129,7 +130,6 @@ Last updated: 2026-10-14.
 
 ### After launch / optional
 - Handover guide for the client (what each admin module edits, how to add users in Auth0); agree maintenance terms (plan §31).
-- Usuarios page (read-only roster) — low priority.
 - Migrate `google.maps.Marker` to AdvancedMarker (needs a Map ID) — currently only a deprecation warning.
 - More editable content: hero video/image, SEO titles/descriptions, closing forms on Nosotros/Servicios, regions/properties intros, variable-length lists.
 - Phase 2 per the plan: Studio (`studio/`), "Tengo un terreno" funnel, second-stage CRM. The `locationPrecision` field exists in `studio/schemaTypes/documents/opportunity.ts` but the Studio isn't deployed.

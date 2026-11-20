@@ -91,6 +91,18 @@ export default function RegionForm({ mode, id, initialValues }) {
         <Field label="Orden de despliegue">
           <input type="number" name="order" defaultValue={v.order ?? 0} className={inputClasses} />
         </Field>
+        <div className="flex items-center gap-3 md:col-span-2">
+          <input
+            type="checkbox"
+            id="visible"
+            name="visible"
+            defaultChecked={v.visible ?? true}
+            className="h-4 w-4 accent-brand-600"
+          />
+          <label htmlFor="visible" className="text-sm text-ink">
+            Visible en el sitio (si se desmarca, la región no aparece en la web pública)
+          </label>
+        </div>
         <Field label="Descripción (ES)" full>
           <textarea name="description_es" rows={4} defaultValue={v.description_es} className={inputClasses} />
         </Field>
